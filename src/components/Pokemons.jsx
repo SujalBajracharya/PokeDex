@@ -22,7 +22,7 @@ const Pokemons = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap justify-center space-x-4">
+    <div className="flex flex-wrap justify-center gap-3">
       {pokemonList.length > 0 ? (
         pokemonList.map((pokemon, index) => (
           <PokemonCardHandler key={index} pokemonUrl={pokemon.url} />
