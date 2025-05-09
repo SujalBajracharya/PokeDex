@@ -4,16 +4,20 @@ import PokemonCard from "../components/PokemonCard";
 const PokemonCardHandler = ({ pokemonUrl }) => {
   const [pokemon, setPokemon] = useState(null);
   const [evolutionChain, setEvolutionChain] = useState([]);
+  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // Fetch Pokémon data
+  // Fetch Pokémon data and related information
   useEffect(() => {
     const fetchPokemon = async () => {
       try {
         const res = await fetch(pokemonUrl);
         const data = await res.json();
         setPokemon(data);
+
+        // Fetch the evolution chain and description based on species URL
         fetchEvolutionChain(data.species.url);
+        fetchPokemonDescription(data.species.url);
       } catch (error) {
         console.error("Error fetching Pokémon:", error);
       } finally {
@@ -40,6 +44,24 @@ const PokemonCardHandler = ({ pokemonUrl }) => {
         setEvolutionChain(chain);
       } catch (error) {
         console.error("Error fetching evolution chain:", error);
+      }
+    };
+
+    const fetchPokemonDescription = async (speciesUrl) => {
+      try {
+        const res = await fetch(speciesUrl);
+        const data = await res.json();
+
+        // Get the English flavor text description
+        const englishDescription = data.flavor_text_entries.find(
+          (entry) => entry.language.name === "en"
+        );
+
+        setDescription(
+          englishDescription?.flavor_text || "No description available."
+        );
+      } catch (error) {
+        console.error("Error fetching Pokémon description:", error);
       }
     };
 
@@ -73,7 +95,13 @@ const PokemonCardHandler = ({ pokemonUrl }) => {
     );
   }
 
-  return <PokemonCard pokemon={pokemon} evolutionChain={evolutionChain} />;
+  return (
+    <PokemonCard
+      pokemon={pokemon}
+      evolutionChain={evolutionChain}
+      description={description}
+    />
+  );
 };
 
 export default PokemonCardHandler;

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import PokemonCard from "./PokemonCard";
+import PokemonCard from "./PokemonCard"; // Import PokemonCard directly
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState(""); // State to hold the search input
   const [searchResults, setSearchResults] = useState(null); // State to hold the search results
   const [loading, setLoading] = useState(false); // State to handle loading state
   const [error, setError] = useState(""); // State to handle errors
-  const [evolutionChain, setEvolutionChain] = useState([]);
+  const [evolutionChain, setEvolutionChain] = useState([]); // State to hold evolution chain
+  const [description, setDescription] = useState(""); // State to hold Pokémon description
 
   // Function to handle input change
   const handleInputChange = (event) => {
@@ -32,10 +33,11 @@ const Search = () => {
       // Set search results
       setSearchResults(data);
       fetchEvolutionChain(data.species.url);
+      fetchPokemonDescription(data.species.url);
     } catch (err) {
       // Handle error (e.g., Pokémon not found)
       setError("No Pokémon found, please try again.");
-      setSearchResults();
+      setSearchResults(null); // Reset search results
     } finally {
       setLoading(false); // Set loading state to false
     }
@@ -63,13 +65,26 @@ const Search = () => {
     }
   };
 
+  const fetchPokemonDescription = async (speciesUrl) => {
+    try {
+      const res = await fetch(speciesUrl);
+      const data = await res.json();
+
+      // Get the English flavor text description
+      const englishDescription = data.flavor_text_entries.find(
+        (entry) => entry.language.name === "en"
+      );
+
+      setDescription(englishDescription?.flavor_text || "No description available.");
+    } catch (error) {
+      console.error("Error fetching Pokémon description:", error);
+    }
+  };
+
   return (
     <div className="p-4">
       {/* Search Form */}
-      <form
-        onSubmit={handleSearch}
-        className="relative w-full max-w-lg mx-auto"
-      >
+      <form onSubmit={handleSearch} className="relative w-full max-w-lg mx-auto mb-12">
         <input
           type="text"
           value={searchTerm}
@@ -79,7 +94,7 @@ const Search = () => {
         />
         <button
           type="submit"
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white px-4 py-2 rounded-full shadow-md"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary hover:bg-[#F08030] text-white px-4 py-2 rounded-full shadow-md"
         >
           Search
         </button>
@@ -114,7 +129,11 @@ const Search = () => {
 
       {/* Search Results */}
       {searchResults && (
-        <PokemonCard pokemon={searchResults} evolutionChain={evolutionChain} />
+        <PokemonCard
+          pokemon={searchResults}
+          evolutionChain={evolutionChain}
+          description={description}  // Pass the description as a prop to PokemonCard
+        />
       )}
     </div>
   );

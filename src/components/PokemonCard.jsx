@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import "./Premium.css";
 
-const PokemonCard = ({ pokemon, evolutionChain }) => {
-  const [bgColor, setBgColor] = useState("bg-gray-400");
+const PokemonCard = ({ pokemon, evolutionChain, description }) => {
+  const [bgColor, setBgColor] = useState("#ffd700");
 
-  // Pokémon type to background color mapping
   const typeColors = {
-    fire: "bg-red-400",
-    water: "bg-blue-400",
-    grass: "bg-green-400",
-    electric: "bg-yellow-400",
-    psychic: "bg-purple-400",
-    rock: "bg-brown-400",
-    bug: "bg-lime-400",
-    ghost: "bg-indigo-400",
-    dragon: "bg-teal-400",
-    fairy: "bg-pink-400",
-    normal: "bg-gray-400",
-    fighting: "bg-orange-400",
-    poison: "bg-violet-400",
-    ground: "bg-amber-400",
-    flying: "bg-sky-400",
-    ice: "bg-cyan-400",
-    steel: "bg-slate-400",
-    dark: "bg-black-400",
+    fire: "#F08030",
+    water: "#6890F0",
+    grass: "#78C850",
+    electric: "#F8D030",
+    psychic: "#F85888",
+    rock: "#B8A038",
+    bug: "#A8B820",
+    ghost: "#705898",
+    dragon: "#7038F8",
+    fairy: "#EE99AC",
+    normal: "#A8A878",
+    fighting: "#C03028",
+    poison: "#A040A0",
+    ground: "#E0C068",
+    flying: "#A890F0",
+    ice: "#98D8D8",
+    steel: "#B8B8D0",
+    dark: "#705848",
   };
 
   useEffect(() => {
@@ -32,121 +32,110 @@ const PokemonCard = ({ pokemon, evolutionChain }) => {
     }
   }, [pokemon]);
 
+  const getStat = (name) =>
+    pokemon.stats.find((stat) => stat.stat.name === name)?.base_stat;
+
   return (
-    <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg bg-gray-600 p-4">
-      <div
-        className={`max-w-sm rounded-2xl overflow-hidden shadow-lg ${bgColor} p-4`}
-      >
-        {/* Pokémon Image */}
+    <div
+      className="pokemon-card"
+      style={{ background: `linear-gradient(to bottom, ${bgColor}, #ffc107)` }}
+    >
+      <div className="card-header">
+        <div>
+          <span className="basic-badge">BASIC</span>
+        </div>
+        <div className="hp-display">
+          <span className="hp-text">HP</span>
+          <span className="hp-value">{getStat("hp")}</span>
+          <span className="energy-symbol"></span>
+        </div>
+      </div>
+      <div className="flex align-middle pl-3">
+        <span className="pokemon-name">{pokemon.name.toUpperCase()}</span>
+      </div>
+
+      <div className="card-image">
         <img
-          className="w-full h-48 object-cover"
           src={pokemon.sprites.front_default}
           alt={pokemon.name}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
+      </div>
 
-        <div className="px-6 py-4">
-          {/* Pokémon Name */}
-          <div className="font-bold text-xl mb-2 capitalize">
-            {pokemon.name}
-          </div>
+      <div className="pokemon-info">
+        NO. {pokemon.id} • {pokemon.types[0].type.name.toUpperCase()} TYPE
+      </div>
 
-          {/* Pokémon Description */}
-          <p className="text-gray-700 text-base">
-            Known for its incredible speed, {pokemon.name} uses its Tailwind to
-            outmaneuver opponents and strike with precision.
-          </p>
-        </div>
-
-        <div className="px-6 pt-4 pb-2">
-          {/* Pokémon Types */}
-          <div className="mb-2">
-            {pokemon.types.map((type) => (
-              <span
-                key={type.type.name}
-                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >
-                {type.type.name}
-              </span>
-            ))}
-          </div>
-
-          {/* Pokémon Abilities */}
-          <div className="mb-2">
-            <span className="font-semibold">Abilities:</span>
-            {pokemon.abilities.map((ability) => (
-              <span
-                key={ability.ability.name}
-                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >
-                {ability.ability.name}
-              </span>
-            ))}
+      <div className="attack-section">
+        <div className="attack">
+          <div className="attack-details">
+            <p className="pokemon-description">{description}</p>
+            <div className="attack-header">
+              <span className="attack-name">Attack</span>
+              <span className="attack-damage">{getStat("attack")}</span>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div className="px-6 py-4">
-          {/* Pokémon Base Stats */}
-          <div>
-            <div className="text-lg font-semibold">Base Stats:</div>
-            <ul className="text-gray-700 text-base">
-              <li>
-                HP:{" "}
-                {
-                  pokemon.stats.find((stat) => stat.stat.name === "hp")
-                    .base_stat
-                }
-              </li>
-              <li>
-                Attack:{" "}
-                {
-                  pokemon.stats.find((stat) => stat.stat.name === "attack")
-                    .base_stat
-                }
-              </li>
-              <li>
-                Defense:{" "}
-                {
-                  pokemon.stats.find((stat) => stat.stat.name === "defense")
-                    .base_stat
-                }
-              </li>
-              <li>
-                Special Attack:{" "}
-                {
-                  pokemon.stats.find(
-                    (stat) => stat.stat.name === "special-attack"
-                  ).base_stat
-                }
-              </li>
-              <li>
-                Special Defense:{" "}
-                {
-                  pokemon.stats.find(
-                    (stat) => stat.stat.name === "special-defense"
-                  ).base_stat
-                }
-              </li>
-              <li>
-                Speed:{" "}
-                {
-                  pokemon.stats.find((stat) => stat.stat.name === "speed")
-                    .base_stat
-                }
-              </li>
-            </ul>
+      {/* abilities */}
+      <div className="mx-4 my-3">
+        {pokemon.abilities.map((ability) => (
+          <span
+            key={ability.ability.name}
+            className="inline-block bg-transparent rounded-full px-3 py-1 text-sm font-semibold border-opacity-45 border-l border-t-[3px] border-white border-b-[3px] border-r-[3px] border-b-gray-400 border-r-gray-400 text-gray-700 mr-2 mb-2"
+          >
+            {ability.ability.name}
+          </span>
+        ))}
+      </div>
+
+      <div className="card-stats">
+        <div className="stats-bar">
+          <div className="stat">
+            <span className="stat-label">weakness</span>
+            <div className="stat-icon weakness-icon"></div>
+            <span className="stat-value">×2</span>
+          </div>
+          <div className="stat">
+            <span className="stat-label">resistance</span>
+            <div className="stat-icon resistance-icon"></div>
+          </div>
+          <div className="stat">
+            <span className="stat-label">retreat</span>
+            <div className="stat-icon retreat-icon"></div>
           </div>
         </div>
+      </div>
 
-        <div className="px-6 py-4">
+      <div>
+        <div className="px-4">
           {/* Pokémon Evolution Chain */}
-          <div className="px-6 py-4">
-            <div className="text-lg font-semibold">Evolution Chain:</div>
-            <p className="text-gray-700 text-base">
+          <div className="py-4">
+            <p className="text-black text-sm">
               {evolutionChain.length > 0
                 ? evolutionChain.join(" → ")
                 : "No evolution data available"}
             </p>
           </div>
+        </div>
+      </div>
+
+      <div className="card-footer">
+        <div>
+          <div className="illustrator">illus. Souichirou Gunjima</div>
+          <div className="card-symbols">
+            <div className="card-symbol">⚫</div>
+            <div className="card-symbol">
+              {pokemon.types[0].type.name[0].toUpperCase()}
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="card-number">
+            {String(pokemon.id).padStart(4, "0")}/1025 ⚫
+          </div>
+          <div className="copyright">©2025 Pokémon Sujal Project</div>
         </div>
       </div>
     </div>
