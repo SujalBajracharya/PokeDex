@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const PokemonCard = ({ pokemon }) => {
+const PokemonCard = ({ pokemon, evolutionChain }) => {
   const [bgColor, setBgColor] = useState("bg-gray-400");
 
   // Pokémon type to background color mapping
@@ -34,7 +34,9 @@ const PokemonCard = ({ pokemon }) => {
 
   return (
     <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg bg-gray-600 p-4">
-      <div className={`max-w-sm rounded-2xl overflow-hidden shadow-lg ${bgColor} p-4`}>
+      <div
+        className={`max-w-sm rounded-2xl overflow-hidden shadow-lg ${bgColor} p-4`}
+      >
         {/* Pokémon Image */}
         <img
           className="w-full h-48 object-cover"
@@ -88,22 +90,48 @@ const PokemonCard = ({ pokemon }) => {
             <div className="text-lg font-semibold">Base Stats:</div>
             <ul className="text-gray-700 text-base">
               <li>
-                HP: {pokemon.stats.find((stat) => stat.stat.name === "hp").base_stat}
+                HP:{" "}
+                {
+                  pokemon.stats.find((stat) => stat.stat.name === "hp")
+                    .base_stat
+                }
               </li>
               <li>
-                Attack: {pokemon.stats.find((stat) => stat.stat.name === "attack").base_stat}
+                Attack:{" "}
+                {
+                  pokemon.stats.find((stat) => stat.stat.name === "attack")
+                    .base_stat
+                }
               </li>
               <li>
-                Defense: {pokemon.stats.find((stat) => stat.stat.name === "defense").base_stat}
+                Defense:{" "}
+                {
+                  pokemon.stats.find((stat) => stat.stat.name === "defense")
+                    .base_stat
+                }
               </li>
               <li>
-                Special Attack: {pokemon.stats.find((stat) => stat.stat.name === "special-attack").base_stat}
+                Special Attack:{" "}
+                {
+                  pokemon.stats.find(
+                    (stat) => stat.stat.name === "special-attack"
+                  ).base_stat
+                }
               </li>
               <li>
-                Special Defense: {pokemon.stats.find((stat) => stat.stat.name === "special-defense").base_stat}
+                Special Defense:{" "}
+                {
+                  pokemon.stats.find(
+                    (stat) => stat.stat.name === "special-defense"
+                  ).base_stat
+                }
               </li>
               <li>
-                Speed: {pokemon.stats.find((stat) => stat.stat.name === "speed").base_stat}
+                Speed:{" "}
+                {
+                  pokemon.stats.find((stat) => stat.stat.name === "speed")
+                    .base_stat
+                }
               </li>
             </ul>
           </div>
@@ -111,16 +139,12 @@ const PokemonCard = ({ pokemon }) => {
 
         <div className="px-6 py-4">
           {/* Pokémon Evolution Chain */}
-          <div>
+          <div className="px-6 py-4">
             <div className="text-lg font-semibold">Evolution Chain:</div>
             <p className="text-gray-700 text-base">
-              {pokemon.species.url ? (
-                <a href={pokemon.species.url} target="_blank" rel="noopener noreferrer">
-                  View Evolution Chain
-                </a>
-              ) : (
-                "No evolution information available"
-              )}
+              {evolutionChain.length > 0
+                ? evolutionChain.join(" → ")
+                : "No evolution data available"}
             </p>
           </div>
         </div>
