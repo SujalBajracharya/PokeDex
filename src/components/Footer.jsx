@@ -37,7 +37,7 @@ const Footer = () => {
             <Title />
           </div>
           <div>
-            <a href="mailto:sujal.bajracharya55@gmail.com">
+            <a href="mailto:sujal.bajracharya55@gmail.com" className="text-blue-400">
               sujal.bajracharya55@gmail.com
             </a>
           </div>

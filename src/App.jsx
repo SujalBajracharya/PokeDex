@@ -6,6 +6,7 @@ import Menu from "./components/Menu";
 import Search from "./components/Search"; 
 import Compare from "./components/Compare";
 import Premium from "./components/Premium";
+import MyLearning from "./components/MyLearning";
 import Footer from "./components/Footer";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/compare" element={<Compare />} />
         <Route path="/premium" element={<Premium />} />
+        <Route path="/learn" element={<MyLearning />} />
       </Routes>
       <Footer />
     </Router>

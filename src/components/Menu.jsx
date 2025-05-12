@@ -2,21 +2,23 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
 import "./Menu.css";
 import logo from "../assets/logo-pokemon-home.png";
-import Search from "./Search";
 
 const Menu = () => {
   const navigate = useNavigate(); // Initialize the navigate function
 
   // Function to handle routing
   const handleRouting = (page) => {
-    navigate(`/${page}`); // Navigate to the /home route
+    navigate(`/${page}`);
   };
 
   return (
     <div className="flex items-center justify-center gap-6 p-4 mb-5">
       {/* Left side buttons */}
-      <button className="relative px-12 py-3 bg-white text-gray-800 text-base font-medium rounded-full shadow-md overflow-hidden group">
-        <span className="relative z-10">Move</span>
+      <button
+        className="relative px-12 py-3 bg-white text-gray-800 text-base font-medium rounded-full shadow-md overflow-hidden group"
+        onClick={() => handleRouting("learn")}
+      >
+        <span className="relative z-10">My Learning</span>
       </button>
 
       <button
@@ -39,9 +41,10 @@ const Menu = () => {
         <span className="relative z-10">Search</span>
       </button>
 
-      <button 
-      onClick={() => handleRouting("premium")}
-      className="relative px-12 py-3 bg-white text-gray-800 text-base font-medium rounded-full shadow-md overflow-hidden group">
+      <button
+        onClick={() => handleRouting("premium")}
+        className="relative px-12 py-3 bg-white text-gray-800 text-base font-medium rounded-full shadow-md overflow-hidden group"
+      >
         <span className="relative z-10">Premium</span>
       </button>
     </div>
