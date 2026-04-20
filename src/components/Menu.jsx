@@ -1,21 +1,21 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
+import { useNavigate } from "react-router-dom";
 import "./Menu.css";
 import logo from "../assets/logo-pokemon-home.png";
 
 const Menu = () => {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
 
-  // Function to handle routing
   const handleRouting = (page) => {
     navigate(`/${page}`);
   };
 
   return (
-    <div className="flex items-center justify-center gap-6 p-4 mb-5">
+    <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 p-4 mb-5">
+
       {/* Left side buttons */}
       <button
-        className="relative px-12 py-3 bg-white text-gray-800 text-base font-medium rounded-full shadow-md overflow-hidden group"
+        className="relative w-full md:w-auto px-6 md:px-12 py-2 md:py-3 bg-white text-gray-800 text-sm md:text-base font-medium rounded-full shadow-md overflow-hidden group"
         onClick={() => handleRouting("learn")}
       >
         <span className="relative z-10">My Learning</span>
@@ -23,30 +23,35 @@ const Menu = () => {
 
       <button
         onClick={() => handleRouting("compare")}
-        className="relative px-12 py-3 bg-white text-gray-800 text-base font-medium rounded-full shadow-md overflow-hidden group"
+        className="relative w-full md:w-auto px-6 md:px-12 py-2 md:py-3 bg-white text-gray-800 text-sm md:text-base font-medium rounded-full shadow-md overflow-hidden group"
       >
         <span className="relative z-10">Compare</span>
       </button>
 
-      {/* Center image - Now clicking the logo takes you to the home page */}
+      {/* Center image */}
       <button onClick={() => handleRouting("home")}>
-        <img src={logo} alt="Center" className="w-36 h-36 object-contain" />
+        <img
+          src={logo}
+          alt="Center"
+          className="w-24 h-24 md:w-36 md:h-36 object-contain"
+        />
       </button>
 
       {/* Right side buttons */}
       <button
         onClick={() => handleRouting("search")}
-        className="relative px-12 py-3 bg-white text-gray-800 text-base font-medium rounded-full shadow-md overflow-hidden group"
+        className="relative w-full md:w-auto px-6 md:px-12 py-2 md:py-3 bg-white text-gray-800 text-sm md:text-base font-medium rounded-full shadow-md overflow-hidden group"
       >
         <span className="relative z-10">Search</span>
       </button>
 
       <button
         onClick={() => handleRouting("premium")}
-        className="relative px-12 py-3 bg-white text-gray-800 text-base font-medium rounded-full shadow-md overflow-hidden group"
+        className="relative w-full md:w-auto px-6 md:px-12 py-2 md:py-3 bg-white text-gray-800 text-sm md:text-base font-medium rounded-full shadow-md overflow-hidden group"
       >
         <span className="relative z-10">Premium</span>
       </button>
+
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Ro
 import Pokemons from "./components/Pokemons";
 import Title from "./components/Title";
 import Menu from "./components/Menu";
-import Search from "./components/Search"; 
+import Search from "./components/Search";
 import Compare from "./components/Compare";
 import Premium from "./components/Premium";
 import MyLearning from "./components/MyLearning";

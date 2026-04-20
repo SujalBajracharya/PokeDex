@@ -11,26 +11,26 @@ const Pokemons = () => {
 
   // Pokémon type to background color mapping
   const typeColors = {
-    fire: "#F08030",  
+    fire: "#F08030",
     water: "#6890F0",
-    grass: "#78C850", 
-    electric: "#F8D030",  
-    psychic: "#F85888",     
-    rock: "#B8A038",      
-    bug: "#A8B820",      
-    ghost: "#705898",  
-    dragon: "#7038F8",     
-    fairy: "#EE99AC",      
-    normal: "#A8A878",    
-    fighting: "#C03028",   
-    poison: "#A040A0",  
-    ground: "#E0C068",     
-    flying: "#A890F0",    
-    ice: "#98D8D8",     
-    steel: "#B8B8D0",      
-    dark: "#705848",       
+    grass: "#78C850",
+    electric: "#F8D030",
+    psychic: "#F85888",
+    rock: "#B8A038",
+    bug: "#A8B820",
+    ghost: "#705898",
+    dragon: "#7038F8",
+    fairy: "#EE99AC",
+    normal: "#A8A878",
+    fighting: "#C03028",
+    poison: "#A040A0",
+    ground: "#E0C068",
+    flying: "#A890F0",
+    ice: "#98D8D8",
+    steel: "#B8B8D0",
+    dark: "#705848",
   };
-  
+
 
   const fetchPokemonList = async (limit, offsetVal) => {
     try {
@@ -60,11 +60,11 @@ const Pokemons = () => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-2 p-4 justify-center mb-4 sticky top-5 z-50">
+      <div className="hidden md:flex flex-wrap gap-2 p-4 justify-center mb-4 sticky top-5 z-50">
         {Object.entries(typeColors).map(([type, bgClass]) => (
           <div
             key={type}
-            className={`text-white px-3 py-1 rounded-full text-sm capitalize shadow`}
+            className="text-white px-3 py-1 rounded-full text-sm capitalize shadow"
             style={{ backgroundColor: typeColors[type] }}
           >
             {type}

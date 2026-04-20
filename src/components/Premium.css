@@ -196,3 +196,27 @@
 .card:active {
   transform: scale(0.98);
 }
+
+.btn-menu {
+  padding: 10px 20px;
+  background: white;
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 9999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
+}
+
+.btn-menu:hover {
+  transform: translateY(-2px);
+  background: #f3f4f6;
+}
+
+/* mobile tweaks */
+@media (min-width: 768px) {
+  .btn-menu {
+    padding: 12px 28px;
+    font-size: 16px;
+  }
+}

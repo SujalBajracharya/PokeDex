@@ -96,7 +96,7 @@ const Premium = () => {
 
         {/* Footer */}
         <div className="footer">
-          <div className="illus">Illus. Antigravity</div>
+          <div className="illus">Illus. Sujal Bajracharya</div>
           <div className="set-info">
             GEN-III PROMO 025/151 ★
           </div>
