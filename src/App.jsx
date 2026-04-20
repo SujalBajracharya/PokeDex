@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Router components
+import { HashRouter as Router, Route, Routes } from "react-router-dom"; // Router components
 import Pokemons from "./components/Pokemons";
 import Title from "./components/Title";
 import Menu from "./components/Menu";
@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router>
       <Title />
       <Menu />
       <Routes>
