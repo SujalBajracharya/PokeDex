@@ -1,84 +1,108 @@
-import React from "react";
-import './Premium.css'
+import React, { useRef, useState } from "react";
+import "./Premium.css";
 
 const Premium = () => {
+  const cardRef = useRef(null);
+  const [transform, setTransform] = useState(
+    "rotateX(0deg) rotateY(0deg)"
+  );
+
+  let bounds = null;
+
+  const refreshBounds = () => {
+    if (cardRef.current) {
+      bounds = cardRef.current.getBoundingClientRect();
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (!bounds) return;
+
+    const x = (e.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (e.clientY - bounds.top) / bounds.height - 0.5;
+
+    setTransform(
+      `rotateX(${-y * 14}deg) rotateY(${x * 14}deg)`
+    );
+  };
+
+  const handleMouseLeave = () => {
+    setTransform("rotateX(0deg) rotateY(0deg)");
+  };
+
   return (
-    <>
-      <div className="pokemon-card">
+    <div className="wrap">
+      <div
+        className="card"
+        ref={cardRef}
+        style={{ transform }}
+        onMouseEnter={refreshBounds}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="holo" />
+
+        {/* Header */}
         <div className="card-header">
           <div>
-            <span className="basic-badge">BASIC</span>
-            <span className="pokemon-name">Pikachu</span>
-          </div>
-          <div className="hp-display">
-            <span className="hp-text">HP</span>
-            <span className="hp-value">70</span>
-            <span className="energy-symbol"></span>
-          </div>
-        </div>
-
-        <div className="card-image"></div>
-
-        <div className="pokemon-info">
-          NO. 025 Mouse Pokémon HT: 1'4" WT: 13.2 lbs.
-        </div>
-
-        <div className="attack-section">
-          <div className="attack">
-            <div className="attack-energy"></div>
-            <div className="attack-details">
-              <div className="attack-header">
-                <span className="attack-name">Pika Strike</span>
-                <span className="attack-damage">20+</span>
-              </div>
-              <p className="attack-description">
-                If 1 of your Dedenne used Dede-Short during your last turn, this
-                attack does 180 more damage.
-              </p>
+            <div className="rarity">
+              ULTRA RARE · HOLOGRAPHIC
             </div>
+            <div className="poke-name">Pikachu</div>
+          </div>
+
+          <div style={{ textAlign: "right" }}>
+            <div className="hp-label">HP</div>
+            <div className="hp-val">200</div>
           </div>
         </div>
 
-        <div className="card-stats">
-          <div className="stats-bar">
-            <div className="stat">
-              <span className="stat-label">weakness</span>
-              <div className="stat-icon weakness-icon"></div>
-              <span className="stat-value">× 2</span>
+        {/* Artwork */}
+        <div className="art-area">
+          <img src={`${import.meta.env.BASE_URL}pikachu-premium.png`} alt="Pikachu" />
+        </div>
+
+        {/* Info ribbon */}
+        <div className="ribbon">
+          <span>NO. 025 Mouse Pokémon</span>
+          <span>HT: 1'04"</span>
+          <span>WT: 13.2 lbs.</span>
+        </div>
+
+        {/* Move 1 */}
+        <div className="moves">
+          <div className="move">
+            <div className="energy">⚡</div>
+            <div className="energy">⚡</div>
+            <div className="move-name">
+              Thunderclap Strike
             </div>
-            <div className="stat">
-              <span className="stat-label">resistance</span>
-              <div className="stat-icon resistance-icon"></div>
-            </div>
-            <div className="stat">
-              <span className="stat-label">retreat</span>
-              <div className="stat-icon retreat-icon"></div>
-            </div>
+            <div className="move-dmg">150+</div>
           </div>
         </div>
 
-        <div className="card-footer">
-          <div>
-            <div className="illustrator">Illus. Souichirou Gunjima</div>
-            <div className="card-symbols">
-              <div className="card-symbol">⚫</div>
-              <div className="card-symbol">F</div>
-            </div>
-          </div>
-          <div>
-            <div className="card-number">049/195 ⚫</div>
-            <div className="copyright">
-              ©2022 Pokémon / Nintendo / Creatures / GAME FREAK
-            </div>
+        <div className="move-desc">
+          If this Pokémon has any extra Energy attached, this attack does 50 more damage and the opponent's Active Pokémon is Paralyzed.
+        </div>
+
+        {/* Move 2 */}
+        <div className="moves" style={{ paddingBottom: 4 }}>
+          <div className="move">
+            <div className="energy">⚡</div>
+            <div className="move-name">Volt Rush</div>
+            <div className="move-dmg">40</div>
           </div>
         </div>
 
-        <div className="card-description">
-          Pikachu that can generate powerful electricity have cheek sacs that
-          are extra soft and super stretchy.
+        {/* Footer */}
+        <div className="footer">
+          <div className="illus">Illus. Antigravity</div>
+          <div className="set-info">
+            GEN-III PROMO 025/151 ★
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

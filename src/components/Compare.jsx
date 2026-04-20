@@ -68,7 +68,7 @@ const Compare = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 min-h-[calc(40vh-4rem)]">
       <form onSubmit={handleCompare} className="flex gap-4 justify-center mb-6">
         <input
           type="text"

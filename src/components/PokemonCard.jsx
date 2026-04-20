@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Premium.css";
+import "./PokemonCard.css";
 
 const PokemonCard = ({ pokemon, evolutionChain, description }) => {
   const [bgColor, setBgColor] = useState("#ffd700");

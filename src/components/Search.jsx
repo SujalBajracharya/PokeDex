@@ -82,7 +82,7 @@ const Search = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 min-h-[calc(40vh-4rem)]">
       {/* Search Form */}
       <form onSubmit={handleSearch} className="relative w-full max-w-lg mx-auto mb-12">
         <input
