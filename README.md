@@ -12,8 +12,6 @@ Experience the PokéDex in your browser:
 
 ---
 
-![Project Similar to](./public/pokedex-preview.png)
-
 ## ✨ Key Features
 - **Comprehensive Database**: Browse through hundreds of Pokémon from the PokéAPI.
 - **Dynamic Search**: Instantly find your favorite Pokémon by name or ID.
