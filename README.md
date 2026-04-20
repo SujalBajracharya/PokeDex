@@ -12,7 +12,7 @@ Experience the PokéDex in your browser:
 
 ---
 
-![Project Preview](./public/pokedex-preview.png)
+![Project Similar to](./public/pokedex-preview.png)
 
 ## ✨ Key Features
 - **Comprehensive Database**: Browse through hundreds of Pokémon from the PokéAPI.
@@ -55,9 +55,6 @@ Experience the PokéDex in your browser:
    ```bash
    npm run build
    ```
-
-## 📄 License
-Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
